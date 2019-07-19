@@ -118,6 +118,7 @@ class Analysis:
             return None
 
     def save_result(self, request, res):
+        # if catch exception
         if not res:
             return
 
