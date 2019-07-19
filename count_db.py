@@ -9,19 +9,10 @@ class Analysis:
 
     def select_query(self, db):
         cu = self.conn.cursor()
-        sql = ""
-        if db == "drebin":
-            sql = '''select * from (select count(*) as num from data 
-                      where dataset = 'drebin' and dex_md5 != 'none' group by dex_md5) where num > 1'''
-        elif db == "genome":
-            sql = '''select * from (select count(*) as num from data 
-                      where dataset = 'genome' and dex_md5 != 'none' group by dex_md5) where num > 1'''
-        elif db == "virusshare":
-            sql = '''select * from (select count(*) as num from data 
-                      where dataset = 'virusshare' and dex_md5 != 'none' group by dex_md5) where num > 1'''
-        elif db == "rmvdroid":
-            sql = '''select * from (select count(*) as num from data 
-                      where dataset = 'rmvdroid' and dex_md5 != 'none' group by dex_md5) where num > 1'''
+
+        sql = """select * from (select count(*) as num from data 
+                      where dataset = '""" + db + """' and dex_md5 != 'none' group by dex_md5) where num > 1"""
+
         results = cu.execute(sql)
         tmplist = results.fetchall()
         count = 0
